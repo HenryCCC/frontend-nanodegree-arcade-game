@@ -1,6 +1,6 @@
-frontend-nanodegree-arcade-game
-===============================
-!
-Students should use this rubric: https://www.udacity.com/course/viewer#!/c-ud015/l-3072058665/m-3072588797
+How to play this game:
 
-for self-checking their submission.
+1. Open index.html
+2. Use up, down, left, and, right on your keyboard.
+3. The game will be reset once you touch bugs and river.
+4. Enjoy the game and be happy :)
