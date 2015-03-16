@@ -1,3 +1,4 @@
+"use strict";
 // Enemies our player must avoid
 var Enemy = function(x,y) {
     // Variables applied to each of our instances go here,
@@ -8,7 +9,7 @@ var Enemy = function(x,y) {
     this.sprite = 'images/enemy-bug.png';
     this.x = x ;
     this.y = y ;
-}
+};
 
 // Update the enemy's position, required method for game
 // Parameter: dt, a time delta between ticks
@@ -24,39 +25,39 @@ Enemy.prototype.update = function(dt) {
     // which will ensure the game runs at the same speed for
     // all computers.
 
-}
+};
 
 // Draw the enemy on the screen, required method for game
 Enemy.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 // Now write your own player class
 // This class requires an update(), render() and
 // a handleInput() method.
-var player = function(x,y) {
+var Player = function(x,y) {
     this.sprite = 'images/char-boy.png';
     this.x = x;
     this.y = y;
-}
+};
 
-player.prototype.update = function() {
+Player.prototype.update = function() {
     if (this.y < 40) {
-        player.reset()
+        Player.reset();
     }
-}
+};
 
-player.prototype.render = function() {
+Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
-}
+};
 
 
-player.prototype.reset = function() {
+Player.prototype.reset = function() {
     this.x = 200;
     this.y = 400;
-}
+};
 
-player.prototype.handleInput = function(key) {
+Player.prototype.handleInput = function(key) {
     if(key == 'left' && this.x > 0) {
         this.x -= 100;
     }
@@ -69,15 +70,15 @@ player.prototype.handleInput = function(key) {
     if(key == 'down' && this.y < 400) {
         this.y += 90;
     }
-}
+};
 
 var checkCollisions = function() {
     allEnemies.forEach(function(enemy) {
-    if(enemy.x < player.x + 30 && enemy.x + 60 > player.x && enemy.y < player.y + 60 && enemy.y + 40 > player.y) {
+    if(Math.abs(player.x-enemy.x) <= 50 && player.y==enemy.y) {
         player.reset();
     }
     });
-}
+};
 
 // Now instantiate your objects.
 // Place all enemy objects in an array called allEnemies
@@ -90,7 +91,7 @@ var enemy4 = new Enemy (-400 , 40);
 var enemy5 = new Enemy (-500 , 130);
 var allEnemies = [enemy1, enemy2, enemy3, enemy4, enemy5];
 
-var player = new player (200, 400);
+var player = new Player (200, 400);
 
 
 // This listens for key presses and sends the keys to your
