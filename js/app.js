@@ -43,7 +43,7 @@ var Player = function(x,y) {
 
 Player.prototype.update = function() {
     if (this.y < 40) {
-        Player.reset();
+        this.reset();
     }
 };
 
