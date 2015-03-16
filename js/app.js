@@ -15,11 +15,12 @@ var Enemy = function(x,y) {
 // Parameter: dt, a time delta between ticks
 Enemy.prototype.update = function(dt) {
     if (this.x <= 505) {
-        this.x += 160*dt;
+        this.x += 160*dt;  // Set up speed of bugs
     }
 
     else {
-        this.x = Math.random() * -200;
+    
+        this.x = Math.random() * -200; // Make bugs start randomly
     }
     // You should multiply any movement by the dt parameter
     // which will ensure the game runs at the same speed for
@@ -41,6 +42,11 @@ var Player = function(x,y) {
     this.y = y;
 };
 
+/*
+    If player cross river, this function will reset game. 
+    The y coodinate of river is 40.
+*/
+
 Player.prototype.update = function() {
     if (this.y < 40) {
         this.reset();
@@ -51,11 +57,14 @@ Player.prototype.render = function() {
     ctx.drawImage(Resources.get(this.sprite), this.x, this.y);
 };
 
+// Where the player start
 
 Player.prototype.reset = function() {
     this.x = 200;
     this.y = 400;
 };
+
+//Make sure player wont move out of game. Use boolean factor to check.
 
 Player.prototype.handleInput = function(key) {
     if(key == 'left' && this.x > 0) {
@@ -72,6 +81,13 @@ Player.prototype.handleInput = function(key) {
     }
 };
 
+/* 
+
+    If the distance between plaer and bugs less and equal to 50 and they have the same y,
+    that means they collide to each other. The game should be reset.
+
+*/
+
 var checkCollisions = function() {
     allEnemies.forEach(function(enemy) {
     if(Math.abs(player.x-enemy.x) <= 50 && player.y==enemy.y) {
@@ -80,9 +96,7 @@ var checkCollisions = function() {
     });
 };
 
-// Now instantiate your objects.
-// Place all enemy objects in an array called allEnemies
-// Place the player object in a variable called player
+// Set up the start position of bugs and player.
 
 var enemy1 = new Enemy (-150 , 40);
 var enemy2 = new Enemy (-200 , 130);
